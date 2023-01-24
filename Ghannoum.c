@@ -68,6 +68,30 @@ void afficher_vecteur(VECTEUR vect)
     }
 }
 
+/***********************************************
+ *  Fonction permettant de normaliser un vecteur
+ * @param vecteur: vecteur à normaliser
+ * *********************************************/
+
+double normaliser_vecteur(VECTEUR vect)
+{
+	double somme;
+	int i;
+	
+	if (vect.tab_vect == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+	 
+	#pragma omp shared(somme) for reduction(+: somme)
+	for(i = 0; i < vect.taille; i++)
+	{
+		somme = somme + (vect.tab_vect[i] * vect.tab_vect[i]);
+	}
+	 
+	return sqrt(somme); 
+}
+
 /*********************************************
  *  Fonction permettant de libérer un vecteur
  * ******************************************/
@@ -94,17 +118,17 @@ MATRICE_CARREE allouer_matrice_carree(int taille)
 	int i;
 
 	mat.taille = taille;
-	mat.tab_mat =(double**)malloc(taille*sizeof(float));
+	mat.tab_mat =(double**)malloc(taille*sizeof(double));
 	
 
     for(i=0; i<taille; i++)
     {
-        mat.tab_mat[i] = (double*)malloc(taille*sizeof(float));
+        mat.tab_mat[i] = (double*)malloc(taille*sizeof(double));
     }
     
 
     return mat;
-}
+} 
 
 /***********************************************************
  *  Fonction permettant de remplir une matrice aléatoirement
@@ -123,7 +147,7 @@ MATRICE_CARREE generer_matrice_aleatoire(MATRICE_CARREE mat)
     {
         for(j=0; j<mat.taille; j++)
         {
-            mat.tab_mat[i][j] = rand() % 400 + 1; 
+            mat.tab_mat[i][j] = rand() % 1 + 1; 
         }
     }
     
