@@ -6,11 +6,11 @@
 #include <math.h>
 #include <time.h>
 
-typedef struct MATRICE_CARREE
+typedef struct MATRICE
 {
 	int taille;
 	double** tab_mat;
-}MATRICE_CARREE;
+}MATRICE;
 
 typedef struct VECTEUR
 {
@@ -23,11 +23,12 @@ void afficher_vecteur(VECTEUR vect);
 VECTEUR generer_vecteur_aleatoire(VECTEUR vect);
 double normaliser_vecteur(VECTEUR vect);
 void desallouer_vecteur(VECTEUR vect);
-MATRICE_CARREE allouer_matrice_carree(int taille);
-MATRICE_CARREE generer_matrice_aleatoire(MATRICE_CARREE mat);
-void afficher_matrice(MATRICE_CARREE mat);
-void desallouer_matrice_carree(MATRICE_CARREE mat);
-VECTEUR multiplier_mat_vect(MATRICE_CARREE mat, VECTEUR vect, VECTEUR vectRes);
-void pageRank(MATRICE_CARREE mat_adj, double alpha, double tolerance);
+MATRICE allouer_matrice_carree(int taille);
+MATRICE generer_matrice_aleatoire(MATRICE mat);
+MATRICE generer_matrice_adj(MATRICE mat);
+void afficher_matrice(MATRICE mat);
+void desallouer_matrice_carree(MATRICE mat);
+VECTEUR multiplier_mat_vect(MATRICE mat, VECTEUR vect, VECTEUR vectRes);
+void pageRank(MATRICE mat_adj, double alpha, double tolerance);
 
 #endif

@@ -1,4 +1,4 @@
-#include "GHANNOUM.h"
+#include "Ghannoum.h"
 
 /***********************************************************************
  *
@@ -64,7 +64,7 @@ void afficher_vecteur(VECTEUR vect)
 
     for(i=0; i<vect.taille; i++)
     {
-    	printf("vect.tab_vect[%d] = %d\n",i, vect.tab_vect[i]);
+    	printf("vect.tab_vect[%d] = %f\n",i, vect.tab_vect[i]);
     }
 }
 
@@ -112,9 +112,9 @@ void desallouer_vecteur(VECTEUR vect)
  *  Fonction permettant d'allouer l'espace mémoire d'une matrice carrée
  * *******************************************************************/
 
-MATRICE_CARREE allouer_matrice_carree(int taille)
+MATRICE allouer_matrice_carree(int taille)
 {
-	MATRICE_CARREE mat;
+	MATRICE mat;
 	int i;
 
 	mat.taille = taille;
@@ -134,7 +134,27 @@ MATRICE_CARREE allouer_matrice_carree(int taille)
  *  Fonction permettant de remplir une matrice aléatoirement
  * ********************************************************/
 
-MATRICE_CARREE generer_matrice_aleatoire(MATRICE_CARREE mat)
+MATRICE generer_matrice_aleatoire(MATRICE mat)
+{
+    int i, j;
+    
+    if (mat.tab_mat == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+
+    for(i=0; i<mat.taille; i++)
+    {
+        for(j=0; j<mat.taille; j++)
+        {
+            mat.tab_mat[i][j] = rand() % 400 + 1; 
+        }
+    }
+    
+    return mat;
+}
+
+MATRICE generer_matrice_adj(MATRICE mat)
 {
     int i, j;
     
@@ -158,7 +178,7 @@ MATRICE_CARREE generer_matrice_aleatoire(MATRICE_CARREE mat)
  *  Fonction permettant d'afficher une matrice
  * ******************************************/
 
-void afficher_matrice(MATRICE_CARREE mat)
+void afficher_matrice(MATRICE mat)
 {
 	int i,j;
 	
@@ -171,7 +191,7 @@ void afficher_matrice(MATRICE_CARREE mat)
     {
         for(j=0; j<mat.taille; j++)
         {
-            printf("mat.tab_mat[%d][%d] = %d\n",i,j, mat.tab_mat[i][j]);
+            printf("mat.tab_mat[%d][%d] = %f\n",i,j, mat.tab_mat[i][j]);
         }
     }
 }
@@ -180,7 +200,7 @@ void afficher_matrice(MATRICE_CARREE mat)
  *  Fonction permettant de désaouller l'espace mémoire d'une matrice carrée
  * ***********************************************************************/
 
-void desallouer_matrice_carree(MATRICE_CARREE mat)
+void desallouer_matrice_carree(MATRICE mat)
 {
 	if (mat.tab_mat == NULL)
 	{
