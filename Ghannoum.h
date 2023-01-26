@@ -1,10 +1,9 @@
 #ifndef GHANNOUM_H
 #define GHANNOUM_H
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
+
 
 typedef struct MATRICE
 {
@@ -29,6 +28,6 @@ MATRICE generer_matrice_adj(MATRICE mat);
 void afficher_matrice(MATRICE mat);
 void desallouer_matrice_carree(MATRICE mat);
 VECTEUR multiplier_mat_vect(MATRICE mat, VECTEUR vect, VECTEUR vectRes);
-void pageRank(MATRICE mat_adj, double alpha, double tolerance);
+void pageRank(MATRICE mat_trans, double alpha, double tolerance);
 
 #endif
